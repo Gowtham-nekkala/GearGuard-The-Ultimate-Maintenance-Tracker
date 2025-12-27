@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Maintenance Calendar | GearGuard</title>
+  <link rel="stylesheet" href="../static/css/dashboard.css">
+
+  <style>
+    .calendar {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .calendar-card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      width: 220px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="top-nav">
+    <span class="logo">Maintenance</span>
+    <ul>
+      <!-- Always visible -->
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/reporting">Reporting</a></li>
+
+      <!-- Admin only -->
+      {% if session.get("role") == "admin" %}
+      <li><a href="/calendar">Maintenance Calendar</a></li>
+      <li><a href="/equipment">Equipment</a></li>
+      <li><a href="/teams">Teams</a></li>
+      <li><a href="/kanban">Kanban</a></li>
+      <li><a href="/create-request">New</a></li>
+      {% endif %}
+
+      <!-- Logout -->
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <h2 style="padding:20px">Preventive Maintenance Calendar</h2>
+
+  <div class="calendar">
+    {% if requests %}
+    {% for r in requests %}
+    <div class="calendar-card">
+      <strong>{{ r.scheduled_date or "No date" }}</strong>
+      <p>{{ r.subject }}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p style="padding:20px">No preventive maintenance scheduled.</p>
+    {% endif %}
+  </div>
+
+</body>
+
+</html>

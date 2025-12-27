@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+}
+
+/* Top Navigation */
+.top-nav {
+  background: #ffffff;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.top-nav .logo {
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.top-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.top-nav li {
+  cursor: pointer;
+  color: #555;
+}
+
+.top-nav li.active {
+  font-weight: bold;
+  border-bottom: 2px solid #4f9cff;
+}
+
+/* Toolbar */
+.toolbar {
+  padding: 15px 20px;
+  display: flex;
+  gap: 15px;
+  background: #ffffff;
+}
+
+.toolbar input {
+  flex: 1;
+  padding: 8px;
+}
+
+.new-btn {
+  padding: 8px 16px;
+  background: #4f9cff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card .big {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card.red {
+  background: #f87171;
+}
+
+.card.blue {
+  background: #60a5fa;
+}
+
+.card.green {
+  background: #4ade80;
+}
+
+/* Table */
+.table-container {
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px dashed #ccc;
+  text-align: left;
+}
+
+th {
+  background: #f1f5f9;
+}
+
+.status.new {
+  color: #2563eb;
+  font-weight: bold;
+}
+.status.in-progress {
+  color: #d97706;
+  font-weight: bold;
+}
+
+.calendar {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.calendar-card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  width: 200px;
+}
+
+.top-nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.top-nav a:hover {
+  color: #2563eb;
+}

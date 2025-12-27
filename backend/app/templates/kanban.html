@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Maintenance Kanban | GearGuard</title>
+    <link rel="stylesheet" href="../static/css/dashboard.css">
+
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .kanban-board {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .column {
+            flex: 1;
+            background: #e5e7eb;
+            padding: 10px;
+            border-radius: 10px;
+            min-height: 350px;
+        }
+
+        .column h3 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            color: #000;
+            /* 👈 THIS FIXES IT */
+        }
+
+
+        .card a {
+            display: inline-block;
+            margin-top: 6px;
+            margin-right: 6px;
+            font-size: 12px;
+            text-decoration: none;
+            color: #2563eb;
+        }
+
+        .overdue {
+            border-left: 5px solid red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="top-nav">
+        <span class="logo">Maintenance</span>
+        <ul>
+            <!-- Always visible -->
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/reporting">Reporting</a></li>
+
+            <!-- Admin only -->
+            {% if session.get("role") == "admin" %}
+            <li><a href="/calendar">Maintenance Calendar</a></li>
+            <li><a href="/equipment">Equipment</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/kanban">Kanban</a></li>
+            <li><a href="/create-request">New</a></li>
+            {% endif %}
+
+            <!-- Logout -->
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <h2 style="padding:20px">Maintenance Kanban Board</h2>
+
+    <div class="kanban-board">
+
+        <!-- NEW -->
+        <div class="column">
+            <h3>New</h3>
+            {% for r in requests if r.status == "new" %}
+            <div class="card {% if r.scheduled_date and r.scheduled_date < today %}overdue{% endif %}">
+                <strong>{{ r.subject }}</strong><br>
+                <small>Type: {{ r.request_type }}</small><br>
+
+                <a href="/update-status/{{ r.request_id }}/in_progress">Start</a>
+                <a href="/update-status/{{ r.request_id }}/scrap">Scrap</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- IN PROGRESS -->
+        <div class="column">
+            <h3>In Progress</h3>
+            {% for r in requests if r.status == "in_progress" %}
+            <div class="card {% if r.scheduled_date and r.scheduled_date < today %}overdue{% endif %}">
+                <strong>{{ r.subject }}</strong><br>
+                <small>Type: {{ r.request_type }}</small><br>
+
+                <a href="/update-status/{{ r.request_id }}/repaired">Mark Repaired</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- REPAIRED -->
+        <div class="column">
+            <h3>Repaired</h3>
+            {% for r in requests if r.status|lower == "repaired" %}
+            <div class="card">
+                <strong>{{ r.subject }}</strong><br>
+                <small>Completed</small>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- SCRAP -->
+        <div class="column">
+            <h3>Scrap</h3>
+            {% for r in requests if r.status|lower == "scrap" %}
+            <div class="card">
+                <strong>{{ r.subject }}</strong><br>
+                <small>Equipment Unusable</small>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</body>
+
+</html>

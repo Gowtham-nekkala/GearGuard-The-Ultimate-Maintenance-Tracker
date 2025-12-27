@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard | GearGuard</title>
+    <link rel="stylesheet" href="../static/css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="top-nav">
+        <span class="logo">Maintenance</span>
+        <ul>
+            <!-- Always visible -->
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/reporting">Reporting</a></li>
+
+            <!-- Admin only -->
+            {% if session.get("role") == "admin" %}
+            <li><a href="/calendar">Maintenance Calendar</a></li>
+            <li><a href="/equipment">Equipment</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/kanban">Kanban</a></li>
+            <li><a href="/create-request">New</a></li>
+            {% endif %}
+
+            <!-- Logout -->
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <button class="new-btn" onclick="location.href='/create-request'">New</button>
+        <input type="text" placeholder="Search...">
+    </div>
+
+    <!-- KPI CARDS -->
+    <div class="cards">
+        <div class="card red">
+            <h3>Critical Equipment</h3>
+            <h2>{{ critical_count }} Units</h2>
+            <p>Health &lt; 30%</p>
+
+        </div>
+
+        <div class="card blue">
+            <h3>Technician Load</h3>
+            <h2>{{ technician_load }}% Utilized</h2>
+            <p>Assign Carefully</p>
+        </div>
+
+        <div class="card green">
+            <h3>Open Requests</h3>
+            <h2>{{ open_requests }} Pending</h2>
+            <p>{{ overdue_requests }} Overdue</p>
+        </div>
+    </div>
+
+    <p>Role: {{ session.get("role") }}</p>
+
+    <!-- REQUESTS TABLE -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Employee</th>
+                    <th>Technician</th>
+                    <th>Category</th>
+                    <th>Stage</th>
+                    <th>Company</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in requests %}
+                <tr>
+                    <td>{{ r.subject }}</td>
+
+                    <td>Admin</td>
+
+                    <td>
+                        {% if r.team_id %}
+                        Team {{ r.team_id }}
+                        {% else %}
+                        Unassigned
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if r.equipment %}
+                        {{ r.equipment.category }}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {{ r.status.replace("_", " ").title() }}
+                    </td>
+
+                    <td>My Company</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</body>
+
+</html>
