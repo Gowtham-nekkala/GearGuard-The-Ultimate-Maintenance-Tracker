@@ -143,12 +143,102 @@ The system follows a **modular design**, allowing independent development of:
 ## 📁 Project Structure
 
 ```bash
-gearguard/
-│── app.py
-│── models.py
-│── templates/
-│── static/
-│── README.md
+.
+├── app
+│   ├── config.py
+│   ├── controllers
+│   │   ├── auth_controller.py
+│   │   ├── equipment_contoller.py
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── auth_controller.cpython-313.pyc
+│   │   │   ├── equipment_contoller.cpython-313.pyc
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── request_controller.cpython-313.pyc
+│   │   │   └── team_controller.cpython-313.pyc
+│   │   ├── request_controller.py
+│   │   └── team_controller.py
+│   ├── extensions.py
+│   ├── __init__.py
+│   ├── models
+│   │   ├── employee.py
+│   │   ├── equipment.py
+│   │   ├── __init__.py
+│   │   ├── maintenance_request.py
+│   │   ├── maintenance_team.py
+│   │   ├── __pycache__
+│   │   │   ├── employee.cpython-313.pyc
+│   │   │   ├── equipment.cpython-313.pyc
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── maintenance_request.cpython-313.pyc
+│   │   │   ├── maintenance_team.cpython-313.pyc
+│   │   │   └── users.cpython-313.pyc
+│   │   └── users.py
+│   ├── __pycache__
+│   │   ├── config.cpython-313.pyc
+│   │   ├── extensions.cpython-313.pyc
+│   │   └── __init__.cpython-313.pyc
+│   ├── routes
+│   │   ├── auth_route.py
+│   │   ├── calendar_route.py
+│   │   ├── equipment_route.py
+│   │   ├── __init__.py
+│   │   ├── kanban_route.py
+│   │   ├── maintenance_routes.py
+│   │   ├── __pycache__
+│   │   │   ├── auth_route.cpython-313.pyc
+│   │   │   ├── calendar_route.cpython-313.pyc
+│   │   │   ├── equipment_route.cpython-313.pyc
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── kanban_route.cpython-313.pyc
+│   │   │   ├── maintenance_routes.cpython-313.pyc
+│   │   │   └── view_routes.cpython-313.pyc
+│   │   └── view_routes.py
+│   ├── services
+│   │   ├── assignment_service.py
+│   │   ├── auth_service.py
+│   │   ├── equipment_service.py
+│   │   ├── __init__.py
+│   │   ├── maintainance_service.py
+│   │   ├── __pycache__
+│   │   │   ├── assignment_service.cpython-313.pyc
+│   │   │   ├── auth_service.cpython-313.pyc
+│   │   │   ├── equipment_service.cpython-313.pyc
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── maintainance_service.cpython-313.pyc
+│   │   │   ├── team_service.cpython-313.pyc
+│   │   │   └── workflow_service.cpython-313.pyc
+│   │   ├── team_service.py
+│   │   └── workflow_service.py
+│   ├── static
+│   │   ├── css
+│   │   │   ├── auth.css
+│   │   │   └── dashboard.css
+│   │   └── js
+│   │       └── auth.js
+│   ├── templates
+│   │   ├── calendar.html
+│   │   ├── create-request.html
+│   │   ├── dashboard.html
+│   │   ├── equipment.html
+│   │   ├── index.html
+│   │   ├── kanban.html
+│   │   ├── login.html
+│   │   ├── reporting.html
+│   │   ├── signup.html
+│   │   └── teams.html
+│   └── utils
+│       ├── enums.py
+│       ├── helpers.py
+│       ├── __init__.py
+│       └── __pycache__
+│           ├── enums.cpython-313.pyc
+│           └── __init__.cpython-313.pyc
+├── db
+│   ├── schema.sql
+│   └── seed.sql
+├── requirements.txt
+└── run.py
 ```
 
 ---
