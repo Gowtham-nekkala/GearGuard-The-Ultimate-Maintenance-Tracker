@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up | GearGuard</title>
+  <link rel="stylesheet" href="../static/css/auth.css">
+</head>
+
+<body>
+
+  <div class="auth-container">
+    <h2>Sign Up</h2>
+
+    <form method="POST" action="/register">
+      <label>Email ID</label>
+      <input type="email" name="email" required>
+
+      <label>Password</label>
+      <input type="password" name="password" required>
+
+      <label>Re-enter Password</label>
+      <input type="password" name="confirm_password" required>
+
+      <button type="submit">Sign Up</button>
+    </form>
+    <p id="signupError" class="error"></p>
+  </div>
+
+  <script src="../static/js/auth.js"></script>
+</body>
+
+</html>

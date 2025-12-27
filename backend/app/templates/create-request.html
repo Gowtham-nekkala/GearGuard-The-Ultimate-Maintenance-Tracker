@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Maintenance Request | GearGuard</title>
+    <link rel="stylesheet" href="../static/css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <span class="logo">Maintenance</span>
+        <ul>
+            <!-- Always visible -->
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/reporting">Reporting</a></li>
+
+            <!-- Admin only -->
+            {% if session.get("role") == "admin" %}
+            <li><a href="/calendar">Maintenance Calendar</a></li>
+            <li><a href="/equipment">Equipment</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/kanban">Kanban</a></li>
+            <li><a href="/create-request">New</a></li>
+            {% endif %}
+
+            <!-- Logout -->
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <h2 style="padding:20px">Create Maintenance Request</h2>
+
+    <form method="POST" action="/create-request">
+
+        <label>Subject</label>
+        <input type="text" name="subject" required>
+
+        <label>Request Type</label>
+        <select name="request_type">
+            <option value="corrective">Corrective (Breakdown)</option>
+            <option value="preventive">Preventive</option>
+        </select>
+
+        <label>Equipment</label>
+        <select name="equipment_id" required>
+            {% for eq in equipment_list %}
+            <option value="{{ eq.equipment_id }}">
+                {{ eq.equipment_name }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Create Request</button>
+
+    </form>
+
+</body>
+
+</html>

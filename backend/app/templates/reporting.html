@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reporting | GearGuard</title>
+    <link rel="stylesheet" href="../static/css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="top-nav">
+        <span class="logo">Maintenance</span>
+        <ul>
+            <!-- Always visible -->
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/reporting">Reporting</a></li>
+
+            <!-- Admin only -->
+            {% if session.get("role") == "admin" %}
+            <li><a href="/calendar">Maintenance Calendar</a></li>
+            <li><a href="/equipment">Equipment</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/kanban">Kanban</a></li>
+            <li><a href="/create-request">New</a></li>
+            {% endif %}
+
+            <!-- Logout -->
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <h2 style="padding:20px">Reports</h2>
+
+    <p style="padding:20px">
+        Reports such as requests per team, equipment category analysis, and maintenance trends will appear here.
+    </p>
+
+</body>
+
+</html>

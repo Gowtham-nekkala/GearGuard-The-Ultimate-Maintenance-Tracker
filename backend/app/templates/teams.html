@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Teams | GearGuard</title>
+    <link rel="stylesheet" href="../static/css/dashboard.css">
+
+    <style>
+        .team-grid {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .team-card {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .blue {
+            background: #60a5fa;
+        }
+
+        .green {
+            background: #4ade80;
+        }
+
+        .form-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            width: 400px;
+        }
+
+        .form-box input,
+        .form-box select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+        }
+
+        .form-box button {
+            background: #4f9cff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="top-nav">
+        <span class="logo">Maintenance</span>
+        <ul>
+            <!-- Always visible -->
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/reporting">Reporting</a></li>
+
+            <!-- Admin only -->
+            {% if session.get("role") == "admin" %}
+            <li><a href="/calendar">Maintenance Calendar</a></li>
+            <li><a href="/equipment">Equipment</a></li>
+            <li><a href="/teams">Teams</a></li>
+            <li><a href="/kanban">Kanban</a></li>
+            <li><a href="/create-request">New</a></li>
+            {% endif %}
+
+            <!-- Logout -->
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <h2 style="padding:20px">Maintenance Teams</h2>
+
+    <!-- TEAM CARDS -->
+    <div class="team-grid">
+        {% for team in teams %}
+        <div class="team-card {{ 'blue' if loop.index % 2 == 1 else 'green' }}">
+            <h3>{{ team.team_name }}</h3>
+            <p>
+                {{ technicians | selectattr("team_id", "equalto", team.team_id) | list | length }}
+                Technicians
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- ADD TEAM -->
+    <div class="form-box">
+        <h3>Add Team</h3>
+        <form method="POST" action="/teams/add">
+            <input type="text" name="team_name" placeholder="Team name" required>
+            <button type="submit">Add Team</button>
+        </form>
+    </div>
+
+    <!-- ADD MEMBER -->
+    <div class="form-box">
+        <h3>Add Team Member</h3>
+        <form method="POST" action="/teams/add-member">
+            <input type="text" name="name" placeholder="Technician name" required>
+
+            <select name="team_id">
+                {% for team in teams %}
+                <option value="{{ team.team_id }}">{{ team.team_name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Add Member</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
