@@ -1,132 +1,195 @@
-🛠️ GearGuard – The Ultimate Maintenance Tracker
+# 🛠️ GearGuard – The Ultimate Maintenance Tracker
 
-GearGuard is a lightweight maintenance management system designed to help organizations efficiently track their assets, assign maintenance responsibilities, and manage repair workflows. The system connects equipment, maintenance teams, and maintenance requests into a single, easy-to-use platform.
+GearGuard is a lightweight **maintenance management system prototype** designed to help organizations efficiently track assets, assign maintenance responsibilities, and manage repair workflows.
 
-This project is built as a functional prototype to demonstrate core maintenance workflows such as breakdown handling, preventive maintenance scheduling, and technician task management.
+It connects **Equipment**, **Maintenance Teams**, and **Maintenance Requests** into a single, easy-to-use platform, demonstrating how structured workflows can reduce downtime and improve operational visibility.
 
-🎯 Project Objective
+---
+
+## 🎯 Project Objective
 
 The primary goal of GearGuard is to:
 
-Maintain a centralized record of company assets
+* Maintain a centralized record of company assets
+* Streamline the process of reporting and resolving equipment issues
+* Automatically assign the correct maintenance team based on equipment
+* Provide clear visibility into ongoing and scheduled maintenance tasks
 
-Streamline the process of reporting and resolving equipment issues
+---
 
-Assign the right maintenance team automatically based on the equipment
+## 🧠 Core Concept
 
-Provide clear visibility of ongoing and scheduled maintenance tasks
+```
+Equipment  → What needs maintenance
+Teams      → Who performs the maintenance
+Requests   → The work to be done
+```
 
-🧠 Core Concept
+GearGuard tightly links these three entities to enable smooth and traceable maintenance workflows.
 
-Equipment → What needs maintenance
-Maintenance Teams → Who performs the maintenance
-Maintenance Requests → The work to be done
+---
 
-GearGuard ensures that these three elements are tightly connected to enable a smooth maintenance workflow.
+## ✨ Key Features
 
-✨ Key Features
-🔧 Equipment Management
+### 🔧 Equipment Management
 
-Register and manage company assets (machines, vehicles, IT equipment)
+* Register and manage company assets (machines, vehicles, IT equipment)
+* Assign each equipment to a dedicated maintenance team
+* Track equipment status: **Active / Scrapped**
+* Store essential metadata:
 
-Assign each equipment to a dedicated maintenance team
+  * Equipment name & serial number
+  * Purchase date & warranty details
+  * Physical location
+  * Ownership (department / employee)
 
-Track equipment status (Active / Scrapped)
+---
 
-👥 Maintenance Team Management
+### 👥 Maintenance Team Management
 
-Create specialized maintenance teams (Mechanics, Electricians, IT Support)
+* Create specialized maintenance teams (Mechanics, Electricians, IT Support)
+* Assign technicians to teams
+* Enforce workflow rules so only relevant team members handle assigned requests
 
-Assign technicians to teams
+---
 
-Ensure only relevant team members handle assigned requests
+### 📝 Maintenance Requests
 
-📝 Maintenance Requests
+* Create maintenance requests linked to specific equipment
+* Supported request types:
 
-Create maintenance requests for equipment
+  * **Corrective** – Unplanned breakdown repairs
+  * **Preventive** – Scheduled routine maintenance
+* Auto-fill maintenance team based on selected equipment
+* Track request lifecycle:
 
-Support two request types:
-
-Corrective (Breakdown repairs)
-
-Preventive (Routine maintenance)
-
-Auto-fill maintenance team based on selected equipment
-
-Track request lifecycle:
+```
 New → In Progress → Repaired → Scrap
+```
 
-📊 Visual Workflow
+* Capture repair duration and work details
 
-Kanban Board for technicians to manage tasks using drag & drop
+---
 
-Calendar View to display scheduled preventive maintenance
+## 📊 Visual Workflow & UI
 
-Visual indicators for request status and overdue tasks
+### 🗂️ Kanban Board
 
-🔄 Workflow Overview
-Breakdown Maintenance
+* Primary workspace for technicians
+* Drag & drop requests between stages
+* Grouped by status:
 
-User creates a maintenance request
+  * New
+  * In Progress
+  * Repaired
+  * Scrap
+* Visual indicators:
 
-Equipment is selected
+  * Assigned technician avatar
+  * Overdue task highlighting
 
-System auto-assigns the maintenance team
+---
 
-Technician picks up the request
+### 📅 Calendar View
 
-Work is completed and marked as Repaired
+* Displays all **Preventive Maintenance** tasks
+* Requests appear on their scheduled date
+* Enables quick scheduling of routine maintenance
 
-Preventive Maintenance
+---
 
-Manager schedules a preventive request
+## 🔄 Workflow Overview
 
-Request appears in the calendar on the scheduled date
+### 🔥 Breakdown Maintenance (Corrective)
 
-Technician performs the maintenance as planned
+1. User creates a maintenance request
+2. Equipment is selected
+3. System auto-assigns the maintenance team
+4. Request starts in **New** state
+5. Technician picks up the task
+6. Work moves to **In Progress**
+7. Task is completed and marked **Repaired**
 
-🧱 System Architecture
+---
 
-Backend: Flask (Python)
+### 🧰 Preventive Maintenance
 
-Database: SQLite
+1. Manager schedules a preventive maintenance request
+2. Scheduled date is defined
+3. Request appears in the Calendar View
+4. Technician performs maintenance as planned
 
-Frontend: HTML, Jinja2 Templates, Bootstrap
+---
 
-UI Components: Kanban board, Calendar view
+## 🧱 System Architecture
 
-The project follows a modular design, allowing independent development of Equipment, Teams, Requests, and Visualization components.
+* **Backend:** Flask (Python)
+* **Database:** SQLite
+* **Frontend:** HTML, Jinja2 Templates, Bootstrap
+* **UI Components:**
 
-📁 Project Structure
+  * Kanban Board
+  * Calendar View
+
+The system follows a **modular design**, allowing independent development of:
+
+* Equipment
+* Maintenance Teams
+* Maintenance Requests
+* Visualization & UX components
+
+---
+
+## 📁 Project Structure
+
+```bash
 gearguard/
 │── app.py
 │── models.py
 │── templates/
 │── static/
 │── README.md
+```
 
-🚀 Prototype Scope
+---
 
-This repository contains a working prototype focusing on:
+## 🚀 Prototype Scope
 
-Core data models
+This repository contains a **functional prototype** focused on:
 
-Business logic
+* Core data models
+* Business logic
+* Visual workflow demonstration
 
-Visual workflow demonstration
+Planned future enhancements include:
 
-Advanced features such as authentication, notifications, and analytics can be added in future iterations.
+* Authentication & role-based access
+* Notifications & alerts
+* Analytics & reporting dashboards
+* Advanced automation rules
 
-📌 Use Cases
+---
 
-Manufacturing plants tracking machine maintenance
+## 📌 Use Cases
 
-IT departments managing hardware repairs
+* Manufacturing plants tracking machine maintenance
+* IT departments managing hardware repairs
+* Fleet management and vehicle servicing
+* Academic or learning projects for maintenance systems
 
-Fleet management and vehicle servicing
+---
 
-Educational or academic maintenance projects
+## 🏁 Conclusion
 
-🏁 Conclusion
+GearGuard demonstrates how a simple yet well-structured maintenance management system can:
 
-GearGuard demonstrates how a simple, well-structured system can significantly improve maintenance operations by reducing downtime, improving accountability, and providing clear operational visibility.
+* Reduce equipment downtime
+* Improve accountability
+* Provide clear operational visibility
+
+This project serves as a strong foundation for building a full-scale, enterprise-ready maintenance solution.
+
+---
+
+📐 **Mockup Reference**
+Visual design mockups were created using Excalidraw to plan the Kanban and Calendar workflows.
